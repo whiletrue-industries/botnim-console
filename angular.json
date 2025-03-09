@@ -38,8 +38,7 @@
             "styles": [
               "projects/console/src/styles.less"
             ],
-            "scripts": [],
-            "discoverRoutes": true
+            "scripts": []
           },
           "configurations": {
             "production": {
