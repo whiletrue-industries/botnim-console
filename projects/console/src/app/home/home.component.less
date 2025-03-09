@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-flow: column;
+    padding: 16px;
+    background: #eee;
+
+    p {
+        font-size: 1.2em;
+    }
+
+    .items {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        gap: 16px;
+        background: #eee;
+
+        & > * {
+            max-width: 900px;
+        }
+    }
+}

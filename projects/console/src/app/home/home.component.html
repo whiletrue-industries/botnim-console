@@ -1,0 +1,11 @@
+<p>קיימים במערכת <strong>{{ activeUsers().length }} משתמשים פעילים:</strong></p>
+<p-dataview #dv [value]="activeUsers()">
+    <ng-template #list let-items>
+        <div class='items'>
+            @for (item of items; track item.email) {    
+                <app-user-data [user]='item'></app-user-data>   
+            }
+        </div>
+    </ng-template>
+</p-dataview>
+<p>ועוד <strong>{{ inactiveUsers().length }} משתמשים לא פעילים.</strong></p>

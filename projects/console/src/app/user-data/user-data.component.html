@@ -1,0 +1,13 @@
+<p-card [header]='user.name' [subheader]='user.email'>
+    <div class='stats'>
+        <div>
+            משתמש זה שלח {{ totalMessages.toLocaleString() }} הודעות במסגרת {{ totalConversations.toLocaleString() }} שיחות.<br/>
+            מתוכן:
+            <ul>
+                <li>{{ lastMonthMessages.toLocaleString() }} בחודש האחרון</li>
+                <li>{{ lastWeekMessages.toLocaleString() }} בשבוע האחרון</li>
+            </ul>    
+        </div>
+        <p-chart type="bar" [data]="chartData" [options]="chartOptions" />
+    </div>
+</p-card>     

@@ -1,0 +1,40 @@
+:host {
+    display: flex;
+    flex-flow: column;
+
+    .header {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 16px;
+        height: 60px;
+        gap: 16px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+        // overflow: visible;
+        position: sticky;
+        z-index: 1;
+        top: 0;
+        background: #fff;
+
+        .logo {
+            width: fit-content;
+            height: 48px;
+            
+            img {
+                width: auto;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .user {
+            margin-inline-start: auto;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;    
+        }
+    }
+}
