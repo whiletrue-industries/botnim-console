@@ -9,6 +9,7 @@ import Aura from '@primeng/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { definePreset } from '@primeng/themes';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 const MyPreset = definePreset(Aura, {
   semantic: {
@@ -62,7 +63,7 @@ export const appConfig: ApplicationConfig = {
         theme: {
             preset: MyPreset,
         }
-    }),
+    }), provideClientHydration(withEventReplay()),
   ]
 };
 

@@ -38,7 +38,11 @@
             "styles": [
               "projects/console/src/styles.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "projects/console/src/main.server.ts",
+            "prerender": {
+              "discoverRoutes": true
+            }
           },
           "configurations": {
             "production": {
