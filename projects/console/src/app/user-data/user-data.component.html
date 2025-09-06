@@ -2,6 +2,7 @@
     <div class='stats'>
         <div>
             משתמש זה שלח {{ totalMessages.toLocaleString() }} הודעות במסגרת {{ totalConversations.toLocaleString() }} שיחות.<br/>
+            השימוש האחרון היה ב- {{ lastUsed | date:'medium' }}.<br/>
             מתוכן:
             <ul>
                 <li>{{ lastMonthMessages.toLocaleString() }} בחודש האחרון</li>

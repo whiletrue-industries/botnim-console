@@ -3,6 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-data',
@@ -10,7 +11,8 @@ import { ChartModule } from 'primeng/chart';
     ButtonModule,
     CardModule,
     PanelModule,
-    ChartModule
+    ChartModule,
+    DatePipe
   ],
   templateUrl: './user-data.component.html',
   styleUrl: './user-data.component.less'
@@ -20,6 +22,7 @@ export class UserDataComponent implements OnChanges{
   json: string;
 
   dayOfWeekCount = [0, 0, 0, 0, 0, 0, 0];
+  lastUsed: Date | null = null;
   totalMessages = 0;
   totalConversations = 0;
   lastWeekMessages = 0;
@@ -67,6 +70,9 @@ export class UserDataComponent implements OnChanges{
       for (let message of conversation.messageTimestamps) {
         const timestamp = message.seconds * 1000;
         const date = new Date(timestamp);
+        if (!this.lastUsed || date > this.lastUsed) {
+          this.lastUsed = date;
+        }
         const dayOfWeekIdx = date.getDay();
         this.dayOfWeekCount[dayOfWeekIdx] += 1;
         this.totalMessages += 1;
