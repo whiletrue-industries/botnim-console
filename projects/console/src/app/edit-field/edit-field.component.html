@@ -1,0 +1,17 @@
+@let field_ = field();
+@if (field_) {
+    <div class='field text'>
+        @if (label()) {
+            <label class='editable'>{{label()}}:</label>
+        }
+        @if (editing()) {
+            <input type='text' [(ngModel)]='value' (blur)='save()' #textInput/>
+        } @else {
+            @if (value() !== undefined && value() !== null) {
+                <span class='value editable' (click)='editing.set(true)'>{{value()}}</span>
+            } @else {
+                <span class='value editable initial' (click)='editing.set(true)'>לחצו להזנה</span>
+            }
+        }
+    </div>
+}

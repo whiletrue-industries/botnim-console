@@ -10,6 +10,7 @@ import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { definePreset } from '@primeng/themes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 const MyPreset = definePreset(Aura, {
   semantic: {
@@ -47,6 +48,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), 
+    provideHttpClient(withFetch()),
     provideFirebaseApp(() => initializeApp({
       projectId: "botnimconsole",
       appId: "1:328457980432:web:4c27e2f52305381c39d895",

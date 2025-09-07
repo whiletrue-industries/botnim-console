@@ -1,5 +1,35 @@
 :host {
     width: 100%;
+
+    ::ng-deep {
+        .p-card-content {
+            display: flex;
+            flex-flow: column;
+        }
+    }
+    .header {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .role {
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+    .password {
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 16px;
+        width: fit-content;
+        align-self: flex-end;
+    }
+    .email {
+        font-size: 12px;
+        font-weight: 300;
+        color: #666;
+        margin-bottom: 16px;
+    }
     .stats {
         display: flex;
         flex-flow: row;

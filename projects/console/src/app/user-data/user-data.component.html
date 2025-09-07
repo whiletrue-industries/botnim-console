@@ -1,8 +1,11 @@
-<p-card [header]='user.name' [subheader]='user.email'>
+<p-card>
+    <app-edit-field class='header' [data]='userData()' field='display_name' (update)='update($event)'></app-edit-field>
+    <app-edit-field class='role' [data]='userData()' field='role' label='תפקיד' (update)='update($event)'></app-edit-field>
+    <app-edit-field class='email' [data]='userData()' field='email' label='אימייל' (update)='update($event)'></app-edit-field>
     <div class='stats'>
         <div>
             משתמש זה שלח {{ totalMessages.toLocaleString() }} הודעות במסגרת {{ totalConversations.toLocaleString() }} שיחות.<br/>
-            השימוש האחרון היה ב- {{ lastUsed | date:'short' }}.<br/>
+            השימוש האחרון היה ב- {{ lastUsed | date:'short':'UTC':'he-IL' }}.<br/>
             מתוכן:
             <ul>
                 <li>{{ lastMonthMessages.toLocaleString() }} בחודש האחרון</li>
@@ -11,4 +14,5 @@
         </div>
         <p-chart type="bar" [data]="chartData" [options]="chartOptions" />
     </div>
+    <app-edit-field class='password' [data]='userData()' field='password' label='שינוי סיסמה' (update)='update($event)'></app-edit-field>
 </p-card>     

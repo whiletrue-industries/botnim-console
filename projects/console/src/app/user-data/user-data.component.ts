@@ -1,9 +1,13 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, computed, Input, OnChanges, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
 import { ChartModule } from 'primeng/chart';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localeHe from '@angular/common/locales/he';
+import { ApiService, UserData } from '../api.service';
+import { EditFieldComponent } from '../edit-field/edit-field.component';
+registerLocaleData(localeHe);
 
 @Component({
   selector: 'app-user-data',
@@ -12,7 +16,8 @@ import { DatePipe } from '@angular/common';
     CardModule,
     PanelModule,
     ChartModule,
-    DatePipe
+    DatePipe,
+    EditFieldComponent
   ],
   templateUrl: './user-data.component.html',
   styleUrl: './user-data.component.less'
@@ -62,8 +67,49 @@ export class UserDataComponent implements OnChanges{
     ]
   };
 
+  user_ = signal<any>({});
+
+  userProperties = computed<UserData>(() => {
+    const id = this.id();
+    const users = this.api.users();
+    return users.find((u: any) => u.id === id) || ({} as UserData);
+  });
+
+  displayName = computed(() => {
+    const userProps = this.userProperties() || {};
+    const user = this.user_();
+    return userProps.display_name || user.name || 'משתמש אנונימי';
+  });
+
+  id = computed(() => {
+    const user = this.user_();
+    return user.id;
+  });
+
+  email = computed(() => {
+    const user = this.user_();
+    return user.email || 'אימייל לא ידוע';
+  });
+
+  role = computed(() => {
+    const userProps = this.userProperties() || {};
+    return userProps.role || 'תפקיד לא ידוע';
+  });
+
+  userData = computed<UserData>(() => {
+    return {
+      id: this.id(),
+      email: this.email(),
+      display_name: this.displayName(),
+      role: this.role()
+    };
+  });
+
+  constructor(private api: ApiService) {}
+
   ngOnChanges() {
     this.json = JSON.stringify(this.user, null, 2);
+    this.user_.set(this.user);
     const now = new Date().getTime();
     for (let conversation of this.user.conversations) {
       this.totalConversations += 1;
@@ -84,6 +130,14 @@ export class UserDataComponent implements OnChanges{
         }
       }
     }
-    console.log(this.dayOfWeekCount);
+    // console.log(this.dayOfWeekCount);
+  }
+
+  update(update: any) {
+    console.log('Updating user', this.id(), update);
+    this.api.updateUser(this.id(), update).subscribe(() => {
+      // Handle successful update
+      console.log('User updated successfully');
+    });
   }
 }
