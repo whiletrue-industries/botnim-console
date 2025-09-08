@@ -24,6 +24,7 @@ registerLocaleData(localeHe);
 })
 export class UserDataComponent implements OnChanges{
   @Input() user: any;
+  @Input() active = true;
   json: string;
 
   dayOfWeekCount = [0, 0, 0, 0, 0, 0, 0];
@@ -86,9 +87,15 @@ export class UserDataComponent implements OnChanges{
     return user.id;
   });
 
-  email = computed(() => {
+  username = computed(() => {
     const user = this.user_();
-    return user.email || 'אימייל לא ידוע';
+    return user.email;
+  });
+
+  email = computed(() => {
+    const userProps = this.userProperties() || {};
+    const user = this.user_();
+    return userProps.email || 'אימייל לא ידוע';
   });
 
   role = computed(() => {
